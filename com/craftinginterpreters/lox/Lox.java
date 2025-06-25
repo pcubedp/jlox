@@ -34,12 +34,12 @@ public class Lox {
     for(;;) {
         System.out.print("> ");
         String line = reader.readLine();
-        if(line == null) break;
+        if(line == null) break;  //Ctrl + D
         run(line);
     }
 
     private static void run(String source) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
 
         for(Token token : tokens) {
