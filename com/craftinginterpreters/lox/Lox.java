@@ -22,7 +22,29 @@ public class Lox {
     }
 
     private static void runFile(String path) throws IOException {
-        byte[] bytes = FIles.readAllBytes(Paths.get(path));
+        byte[] bytes = Files.readAllBytes(Paths.get(path));
         run(new String(bytes, Charset.defaultCharset()));
+   }
+
+    //REPL
+   private static void runPrompt() throws IOException {
+    InputStreamReader input = new InputStreamReader(System.in);
+    BufferedReader reader = new BufferedReader(input);
+
+    for(;;) {
+        System.out.print("> ");
+        String line = reader.readLine();
+        if(line == null) break;
+        run(line);
+    }
+
+    private static void run(String source) {
+        Scanner scanner = new Scanner(System.in);
+        List<Token> tokens = scanner.scanTokens();
+
+        for(Token token : tokens) {
+            System.out.println(token);
+        }
+    }
    }
 }
